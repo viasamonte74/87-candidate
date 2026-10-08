@@ -27,4 +27,4 @@ def for_class(class_id: str) -> dict[str, Method]:
     return dict(_REGISTRY.get(class_id, {}))
 
 
-from . import witness_ic  # noqa: E402,F401  (registers on import)
+from . import witness_ic, witness_type_c  # noqa: E402,F401  (register on import)

@@ -863,6 +863,7 @@ def test_ic_baseline_abstains_when_governing_versions_tie():
 def test_miners_import_closure_excludes_evaluator_only():
     reachable = closure("sn87_provenonce.miners")
     assert "sn87_provenonce.miners.witness_ic" in reachable
+    assert "sn87_provenonce.miners.witness_type_c" in reachable
     assert not reachable & EVALUATOR_ONLY
 
 

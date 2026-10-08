@@ -65,7 +65,10 @@ from sn87_provenonce.cmt import (  # noqa: E402
     compile_cmt,
     verify_cmt,
 )
-from sn87_provenonce.institutional_v02.contracts import validate_capsule  # noqa: E402
+from sn87_provenonce.institutional_v02.contracts import (  # noqa: E402
+    validate_capsule,
+    validate_differential,
+)
 
 LABEL = "LOCAL ONLY, FICTIONAL FIXTURES, NO CHAIN, NOT AN AXON"
 MAX_BODY = 1 << 20
@@ -158,7 +161,10 @@ class MinerServer(ThreadingHTTPServer):
 
     def answer(self, body: bytes) -> bytes:
         """The byte boundary: canonical capsule bytes in, canonical response bytes out."""
-        return canonical_bytes(self.method(parse_canonical(body)))
+        capsule = parse_canonical(body)
+        differential = self.method(capsule)
+        validate_differential(capsule, differential)  # refuse malformed miner output
+        return canonical_bytes(differential)
 
 
 class Handler(BaseHTTPRequestHandler):
