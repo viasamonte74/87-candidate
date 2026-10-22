@@ -21,7 +21,7 @@ transport = [
   "bittensor==11.1.0",
   "starlette==1.7.0",
   "uvicorn==0.54.0",
-  "valkey==6.1.1",
+  "valkey==6.2.0",
   "httpx==0.28.1",
 ]
 bittensor = [
